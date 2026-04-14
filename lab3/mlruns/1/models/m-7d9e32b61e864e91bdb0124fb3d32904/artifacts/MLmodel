@@ -1,0 +1,33 @@
+artifact_path: /home/koluchiy/Documents/Dana_Airflow/lab3/mlruns/1/models/m-7d9e32b61e864e91bdb0124fb3d32904/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.13
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.11.1
+model_id: m-7d9e32b61e864e91bdb0124fb3d32904
+model_size_bytes: 1959251
+model_uuid: m-7d9e32b61e864e91bdb0124fb3d32904
+prompts: null
+run_id: eaa8eb3f08684b44b3d3bfc12bfbabc5
+signature:
+  inputs: '[{"type": "long", "name": "species", "required": true}, {"type": "long",
+    "name": "island", "required": true}, {"type": "double", "name": "bill_length_mm",
+    "required": true}, {"type": "double", "name": "bill_depth_mm", "required": true},
+    {"type": "double", "name": "flipper_length_mm", "required": true}, {"type": "long",
+    "name": "sex", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-04-14 19:57:50.112913'
