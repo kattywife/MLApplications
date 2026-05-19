@@ -1,0 +1,78 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/stages/prepare_dataset.py
+    deps:
+    - path: src/config.yaml
+      hash: md5
+      md5: 23d65e29e3f61960b4b1306e7fe9f9a7
+      size: 427
+    - path: src/stages/prepare_dataset.py
+      hash: md5
+      md5: 0c35807c8a292ad12eb37a64e7f2ca73
+      size: 944
+    outs:
+    - path: data/penguins_processed.csv
+      hash: md5
+      md5: 20331932725d250e27536fe9a04a06b5
+      size: 15724
+    - path: data/penguins_raw.csv
+      hash: md5
+      md5: 15d47d23d10f2f2f842439a2abdb771d
+      size: 15010
+  split:
+    cmd: python src/stages/data_split.py
+    deps:
+    - path: data/penguins_processed.csv
+      hash: md5
+      md5: 20331932725d250e27536fe9a04a06b5
+      size: 15724
+    - path: src/stages/data_split.py
+      hash: md5
+      md5: f7db1e54e561ef027f4a2a20c0a9b45b
+      size: 511
+    outs:
+    - path: data/test_penguins.csv
+      hash: md5
+      md5: b5b1562e7cf79fa77aa25a0275809776
+      size: 3242
+    - path: data/train_penguins.csv
+      hash: md5
+      md5: 1e895fc6e829abf57ff8283928ccfcee
+      size: 12487
+  train:
+    cmd: python src/stages/train.py
+    deps:
+    - path: data/train_penguins.csv
+      hash: md5
+      md5: 1e895fc6e829abf57ff8283928ccfcee
+      size: 12487
+    - path: src/stages/train.py
+      hash: md5
+      md5: 7f32c35bc1e4220e0c1ea826c546b8de
+      size: 615
+    outs:
+    - path: models/penguin_model.joblib
+      hash: md5
+      md5: 917c7272a83731c14009fc06b6d1c292
+      size: 466161
+  evaluate:
+    cmd: python src/stages/evaluate.py
+    deps:
+    - path: data/test_penguins.csv
+      hash: md5
+      md5: b5b1562e7cf79fa77aa25a0275809776
+      size: 3242
+    - path: models/penguin_model.joblib
+      hash: md5
+      md5: 917c7272a83731c14009fc06b6d1c292
+      size: 466161
+    - path: src/stages/evaluate.py
+      hash: md5
+      md5: 88322ebdfedd4557a5f113936545d9e8
+      size: 731
+    outs:
+    - path: report/metrics.json
+      hash: md5
+      md5: 3fb9cc7923562b0b76a6e8b06b47062d
+      size: 63

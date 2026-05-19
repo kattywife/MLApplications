@@ -1,0 +1,33 @@
+stages:
+  prepare:
+    cmd: python src/stages/prepare_dataset.py
+    deps:
+      - src/stages/prepare_dataset.py
+      - src/config.yaml
+    outs:
+      - data/penguins_raw.csv
+      - data/penguins_processed.csv
+  split:
+    cmd: python src/stages/data_split.py
+    deps:
+      - src/stages/data_split.py
+      - data/penguins_processed.csv
+    outs:
+      - data/train_penguins.csv
+      - data/test_penguins.csv
+  train:
+    cmd: python src/stages/train.py
+    deps:
+      - src/stages/train.py
+      - data/train_penguins.csv
+    outs:
+      - models/penguin_model.joblib
+  evaluate:
+    cmd: python src/stages/evaluate.py
+    deps:
+      - src/stages/evaluate.py
+      - models/penguin_model.joblib
+      - data/test_penguins.csv
+    metrics:
+      - report/metrics.json:
+          cache: false

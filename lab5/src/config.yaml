@@ -1,0 +1,19 @@
+data_load:
+  dataset: "penguins" # Будем подгружать через seaborn
+  raw_path: "data/penguins_raw.csv"
+
+featurize:
+  processed_path: "data/penguins_processed.csv"
+
+data_split:
+  test_size: 0.2
+  trainset_path: "data/train_penguins.csv"
+  testset_path: "data/test_penguins.csv"
+
+train:
+  model_path: "models/penguin_model.joblib"
+  n_estimators: 100
+  max_depth: 5
+
+test:
+  metrics_path: "report/metrics.json"
